@@ -15,7 +15,11 @@ function getStoresIndex(){
                     <h1>Store Name: ${store.attributes.name}</h1>
                     <h3>Store Location: ${store.attributes.city}</h3>
                     <h3>Store Phone: ${store.attributes.phone}</h3>
-                    <button data-id=${store.id}> Edit ${store.attributes.name} Information </button>
+                    <button data-id=${store.id}> See ${store.attributes.name} Customers Information </button>
+                    <button> Edit Store Information </button>
+                    <br>
+                    <br>
+                    <br>
                 </div>
             `
         document.querySelector('#store-container').innerHTML += showStore;    
