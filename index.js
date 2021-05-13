@@ -13,24 +13,32 @@ function getStoresIndex(){
     .then (stores => {
         stores.data.map(store => {
             const showStore = `
-                <div id=${store.id}>
+                <div id=store-${store.id}>
                     <h4>Store Name: ${store.attributes.name}</h4>
-                    <button class=store-info id=${store.id}> See ${store.attributes.name} Information </button>
+                    <button class=store-info id=info-button-${store.id}> See ${store.attributes.name} Information </button>
                     <br>    
                 </div>`
-        document.querySelector('#store-container').innerHTML += showStore;    
+
+            document.querySelector('#store-container').innerHTML += showStore; 
+            
+            let button = document.getElementById(`info-button-${store.id}`)
+            console.log(button)
+            
+            button.addEventListener('click', function(){
+                console.log('hey')
+            })   
         })
     })
 }
 
 
-const storeButton = document.querySelectorAll(".store-info")
-// console.log(storeButton)
-for (button of storeButton){
-    button.addEventListener("click", function(){
-        console.log("hey")
-    })
-}
+// const storeButton = document.querySelectorAll(".store-info")
+// // console.log(storeButton)
+// for (button of storeButton){
+//     button.addEventListener("click", function(){
+//         console.log("hey")
+//     })
+// }
 
 
 
