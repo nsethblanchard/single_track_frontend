@@ -1,17 +1,19 @@
-const storeIndex = "http://localhost:3000/api/stores"
-let storeOption = document.querySelector('#pref-store')
+const storeOption = document.querySelector('#pref-store')
+const createCustForm = document.querySelector('#create-cust-form')
 
-document.addEventListener("DOMContentLoaded", function(e){
-    e.preventDefault()
+document.addEventListener("DOMContentLoaded", function(){
+    
     getStoresIndex()
+    createNewCustomer()
 });
 
+
 function getStoresIndex(){
-    fetch(storeIndex)
+    // read fetch for store index!!
+    fetch('http://localhost:3000/api/stores')
     .then (resp => resp.json())
     .then (stores => {
         stores.data.map(store => {
-            
             const showStore = `
                 <div id=store-${store.id}>
                     <h4>Store Name: ${store.attributes.name}</h4>
@@ -30,35 +32,25 @@ function getStoresIndex(){
             // add all of the store names as options in new customer dropdown
             let newOption = document.createElement('option')
             newOption.innerText = store.attributes.name
+            newOption.value = store.id
             storeOption.appendChild(newOption)
         })
     })
 }
 
-
-// const storeButton = document.querySelectorAll(".store-info")
-// // console.log(storeButton)
-// for (button of storeButton){
-//     button.addEventListener("click", function(){
-//         console.log("hey")
-//     })
-// }
+function createNewCustomer(){
+    createCustForm.addEventListener('submit', function(e) {
+        e.preventDefault()
+        console.log(e)
+        // second fetch for creating new customer
+        
 
 
+    })
 
 
-// storeContainer.addEventListener('click', function(e){
-//     fetch(`http://localhost:3000/api/stores/${e.target.id}`)
-//     .then(resp => resp.json())
-//     .then(info => {
-//         // console.log(info.data.attributes.customers.length)
+}
 
-//         info.data.attributes.customers.map(cust =>{
-//             console.log(cust)
-            
-//         })    
-//     })   
-// })
     
 
 
