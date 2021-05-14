@@ -12,14 +12,12 @@
         <h1>Welcome to Single Track</h1>
         <h2>Customer Data for your Cycling Businesses</h2>
         <br>
-        <h3>Please choose the store:</h3>
-        <br>
         
         <div id="store-container">
-
+        
         </div>
-
-        <div id='form-container'>
+            
+        <div id='form-container' class='hidden'>
             <form id='create-cust-form'>
                 <h3>Create a New Customer</h3>
                 <label for="input-name">Customer Name:</label>
@@ -43,13 +41,6 @@
                 <br>
                 <br>
 
-                <label for="pref-store">Customer's Preferred Store:</label>
-                <select name="store_id" id="pref-store">
-                    <!-- dynamically add each store through JS!!! -->
-                </select>
-
-                <br>
-                <br>
                 <input id='create-button' type="submit" name='submit' value='Create New Customer'>
             </form>
         </div>
