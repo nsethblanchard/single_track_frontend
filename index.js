@@ -11,9 +11,12 @@ function getStoresIndex(){
     .then (resp => resp.json())
     .then (store => {
         console.log(store.data.attributes.name)
-        const storeName = document.createElement('h1').innerText = store.data.attributes.name
+        const storeName = document.createElement('h1')
+        storeName.innerText = store.data.attributes.name
         const storePic = document.createElement('img')
-        storePic.src = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.redbeardbrews.com%2Flocal_businesses%2Fblack-dog-bikes%2F&psig=AOvVaw0YV9buZ1EG4q44o-5WAho-&ust=1621077702403000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCJCiu5iHyfACFQAAAAAdAAAAABAD'
+        storePic.src = 'https://lh3.googleusercontent.com/OZ_i32kAJo5viB3gTBaph2QhI1DclqlGsr53Pfnc4nBWULSmm6CmZGalXiTiO0cM3TzZvg=s85'
+        storePic.width = '350'
+        const container = document.querySelector('#store-container').append(storeName,storePic)
         // stores.data.forEach(store => {
         //     const showStore = `
         //         <div id="store-${store.id}">
