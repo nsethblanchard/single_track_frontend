@@ -17,44 +17,40 @@ function getStore(){
         const storePic = document.createElement('img')
         storePic.src = 'https://lh3.googleusercontent.com/OZ_i32kAJo5viB3gTBaph2QhI1DclqlGsr53Pfnc4nBWULSmm6CmZGalXiTiO0cM3TzZvg=s85'
         storePic.width = '350'
-        const container = document.querySelector('#store-container')
-        container.append(storeName, storePhone, storePic)
+        const storeContainer = document.querySelector('#store-container')
+        storeContainer.append(storeName, storePhone, storePic)
 
-        // list of current customers
+        // button for customers
+        const custButtonDiv = document.querySelector('#customer-list-button')
         const button = document.createElement('button')
         button.classList.add('btn-secondary')
         button.innerHTML = "Show List of Current Customers"
-        const custCont = document.querySelector('#customer-container')
-        custCont.appendChild(button)
+        custButtonDiv.appendChild(button)
+        
+        
+        
+        // list of customers
+        const custContainer = document.querySelector('#customer-container')
+        const customerList = store.data.attributes.customers
+        customerList.map(customer => {
+            const customerDiv = document.createElement('div');
+            
+            custContainer.appendChild(customerDiv);
+
+            const customerName = document.createElement('p')
+            customerName.innerText = customer.name
+            customerDiv.appendChild(customerName)
+            
+
+
+            // console.log(customer)
+        })
 
 
         button.addEventListener('click', function(e){
             e.preventDefault()
             console.log('hey')
         })
-
-
-
-
-        // stores.data.forEach(store => {
-        //     const showStore = `
-        //         <div id="store-${store.id}">
-        //         <h4>Store Name: ${store.attributes.name}</h4>
-        //         <button class="store-info" id="info-button-${store.id}"> See ${store.attributes.name} Information </button>
-        //         <br>    
-        //         </div>
-        //         `                   
-        //     document.querySelector('#store-container').innerHTML += showStore; 
-                
-            // let button = document.querySelector(`#info-button-${store.id}`)
-            // console.log(button)
-           
-            
-            // button.addEventListener('click', function(e){
-            //     e.preventDefault()
-            //     console.log('hey')
-            // })    
-        // })
     })
 }
 
