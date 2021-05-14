@@ -24,7 +24,7 @@ function getStore(){
         const showHideButton = document.createElement('button')
         showHideButton.classList.add('btn-secondary')
         
-        showHideButton.innerHTML = "Current Customers"
+        showHideButton.innerHTML = "Toggle Customer View"
         custButtonDiv.appendChild(showHideButton)
 
         showHideButton.addEventListener('click', function(e){
