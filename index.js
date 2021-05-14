@@ -1,22 +1,41 @@
-// const storeOption = document.querySelector('#pref-store')
 const createCustForm = document.querySelector('#create-cust-form')
 
 document.addEventListener("DOMContentLoaded", function(){
-    getStoresIndex()
+    getStore()
     createNewCustomer()
 });
 
-function getStoresIndex(){
+function getStore(){
     fetch('http://localhost:3000/api/stores/1')
     .then (resp => resp.json())
     .then (store => {
-        console.log(store.data.attributes.name)
+        // Store Info
         const storeName = document.createElement('h1')
         storeName.innerText = store.data.attributes.name
+        const storePhone = document.createElement('h3')
+        storePhone.innerText = store.data.attributes.phone
         const storePic = document.createElement('img')
         storePic.src = 'https://lh3.googleusercontent.com/OZ_i32kAJo5viB3gTBaph2QhI1DclqlGsr53Pfnc4nBWULSmm6CmZGalXiTiO0cM3TzZvg=s85'
         storePic.width = '350'
-        const container = document.querySelector('#store-container').append(storeName,storePic)
+        const container = document.querySelector('#store-container')
+        container.append(storeName, storePhone, storePic)
+
+        // list of current customers
+        const button = document.createElement('button')
+        button.classList.add('btn-secondary')
+        button.innerHTML = "Show List of Current Customers"
+        const custCont = document.querySelector('#customer-container')
+        custCont.appendChild(button)
+
+
+        button.addEventListener('click', function(e){
+            e.preventDefault()
+            console.log('hey')
+        })
+
+
+
+
         // stores.data.forEach(store => {
         //     const showStore = `
         //         <div id="store-${store.id}">
