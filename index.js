@@ -1,8 +1,7 @@
-const createCustForm = document.querySelector('#create-cust-form')
+
 
 document.addEventListener("DOMContentLoaded", function(){
     getStore()
-    createNewCustomer()
 });
 
 function getStore(){
@@ -20,54 +19,87 @@ function getStore(){
         const storeContainer = document.querySelector('#store-container')
         storeContainer.append(storeName, storePhone, storePic)
 
-        // button for customers
-        const custButtonDiv = document.querySelector('#customer-list-button')
-        const button = document.createElement('button')
-        button.classList.add('btn-secondary')
-        button.innerHTML = "Show List of Current Customers"
-        custButtonDiv.appendChild(button)
+        // button for to show/hide customers
+        const custButtonDiv = document.querySelector('#customer-buttons')
+        const showHideButton = document.createElement('button')
+        showHideButton.classList.add('btn-secondary')
         
-        
-        
+        showHideButton.innerHTML = "Current Customers"
+        custButtonDiv.appendChild(showHideButton)
+
+        showHideButton.addEventListener('click', function(e){
+            e.preventDefault()
+            custContainer.classList.toggle('hidden') 
+        })
+
         // list of customers
         const custContainer = document.querySelector('#customer-container')
         const customerList = store.data.attributes.customers
+        
+        createNewCustomer()
+        // called this here so that I wouldn't have to refresh to see new customer
+
         customerList.map(customer => {
             const customerDiv = document.createElement('div');
-            
+            customerDiv.classList.add('float-child')
             custContainer.appendChild(customerDiv);
 
-            const customerName = document.createElement('p')
+            const customerName = document.createElement('h5')
             customerName.innerText = customer.name
             customerDiv.appendChild(customerName)
+
+            const customerEmail = document.createElement('p')
+            customerEmail.innerText = customer.email
+            customerDiv.appendChild(customerEmail)
+
+            const customerPhone = document.createElement('p')
+            customerPhone.innerText = customer.phone
+            customerDiv.appendChild(customerPhone)
+
+            const customerBikeStyle = document.createElement('p')
+            customerBikeStyle.innerText = `Customer Bike Style: ${customer.bikeStyle}`
+            customerDiv.appendChild(customerBikeStyle)
+
+            // customer edit/delete buttons 
+            const editCustomerButton = document.createElement('button')
+            editCustomerButton.classList.add('btn-secondary')
+            editCustomerButton.innerHTML = `Edit ${customer.name}`
+            customerDiv.appendChild(editCustomerButton)
             
-
-
-            // console.log(customer)
+            const deleteCustomerButton = document.createElement('button')
+            deleteCustomerButton.classList.add('btn-secondary')
+            deleteCustomerButton.innerHTML = `Delete ${customer.name}`
+            customerDiv.appendChild(deleteCustomerButton)
         })
 
+        // button to show/hide new customer form
+        const newCustomerForm = document.createElement('button')
+        newCustomerForm.classList.add('btn-secondary')
+        newCustomerForm.innerHTML = "Add new customer"
+        custButtonDiv.appendChild(newCustomerForm)
 
-        button.addEventListener('click', function(e){
+        const form = document.querySelector('#form-container')
+        newCustomerForm.addEventListener('click', function(e){
             e.preventDefault()
-            console.log('hey')
+            form.classList.toggle('hidden'); 
         })
+
+
     })
 }
 
-
+const createCustForm = document.querySelector('#create-cust-form')
 
 function createNewCustomer(){
-    createCustForm.addEventListener('submit', function(e) {
-        e.preventDefault()
-        
+    createCustForm.addEventListener('submit', function() {
         // set values from customer form after submit
         const nameInput = document.querySelector('#input-name').value
         const emailInput = document.querySelector('#input-email').value
         const phoneInput = document.querySelector('#input-phone').value
         const stravaInput = document.querySelector('#input-stravaURL').value
         const prefRiding = document.querySelector('#input-bikeStyle').value
-        const prefStore = document.querySelector('#pref-store').value
-        postFetch(nameInput, emailInput, phoneInput, stravaInput, prefRiding, prefStore)
+        const storeID = 1
+        postFetch(nameInput, emailInput, phoneInput, stravaInput, prefRiding, storeID)
     })
 
     function postFetch(name, email, phone, stravaURL, bikeStyle, store_id) {
@@ -80,10 +112,13 @@ function createNewCustomer(){
                 "Accept": "application/json"
             },
             body: JSON.stringify(data)})
-            // you can use the data variable instead of adding each key since key name and value are same...
+            // you can use the data variable instead of adding each key/value pair since key name and value are same...
 
         .then(resp => resp.json())
-        .then(cust => console.log(cust))
+        .then(cust => {
+            
+            console.log(cust)
+        })
     }
 }
 
