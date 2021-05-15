@@ -8,6 +8,13 @@ function getStore(){
     fetch('http://localhost:3000/api/stores/1')
     .then (resp => resp.json())
     .then (store => {
+
+        // debugger
+        // creates a new instance of a syllabus class
+        let newStore = new Store(store.data, store.data.attributes)
+        // store.data grabs the id and then store.data.attributes grabs the rest(due to fastJSON)
+
+
         // Store Info
         const storeName = document.createElement('h1')
         storeName.innerText = store.data.attributes.name
