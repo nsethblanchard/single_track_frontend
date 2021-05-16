@@ -14,7 +14,7 @@ function getStore(){
         let newStore = new Store(store.data, store.data.attributes)
         // store.data grabs the id and then store.data.attributes grabs the rest(due to fastJSON)
 
-
+        console.log(newStore)
         // Store Info
         const storeName = document.createElement('h1')
         storeName.innerText = store.data.attributes.name
@@ -47,6 +47,9 @@ function getStore(){
         // called this here so that I wouldn't have to refresh to see new customer
 
         customerList.map(customer => {
+
+            // PUT THE NEW CUSTOMER HERE!!!!
+
             const customerDiv = document.createElement('div');
             customerDiv.classList.add('float-child')
             custContainer.appendChild(customerDiv);
@@ -90,8 +93,6 @@ function getStore(){
             e.preventDefault()
             form.classList.toggle('hidden'); 
         })
-
-
     })
 }
 
