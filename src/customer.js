@@ -1,12 +1,12 @@
 
 
 class Customer {
-    constructor(id, attributes) {
-        this.id = id
-        this.name = attributes.name;
-        this.email = attributes.email;
-        this.phone = attributes.phone;
-        this.bikeStyle = attributes.bikeStyle;
+    constructor(data) {
+        this.id = data.id
+        this.name = data.name;
+        this.email = data.email;
+        this.phone = data.phone;
+        this.bikeStyle = data.bikeStyle;
         Customer.all.push(this);
     }  
 }

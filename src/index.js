@@ -9,12 +9,16 @@ function getStore(){
     .then (resp => resp.json())
     .then (store => {
 
-        // debugger
+        
         // creates a new instance of a syllabus class
         let newStore = new Store(store.data, store.data.attributes)
         // store.data grabs the id and then store.data.attributes grabs the rest(due to fastJSON)
 
-        console.log(newStore)
+        
+        store.data.attributes.customers.forEach(data => {
+            let newCust = new Customer(data)
+        })
+
         // Store Info
         const storeName = document.createElement('h1')
         storeName.innerText = store.data.attributes.name
@@ -48,6 +52,7 @@ function getStore(){
 
         customerList.map(customer => {
 
+            
             // PUT THE NEW CUSTOMER HERE!!!!
 
             const customerDiv = document.createElement('div');

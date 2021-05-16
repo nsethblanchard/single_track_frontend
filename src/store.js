@@ -11,6 +11,10 @@ class Store {
         // debugger
     }
 
+    // don't need "function" keyword when declared in classes
+    renderStore() {
+        debugger
+    }
 
 
 }
