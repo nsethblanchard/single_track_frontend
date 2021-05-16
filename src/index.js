@@ -1,8 +1,23 @@
-// document.addEventListener("DOMContentLoaded", function(){
-//     getStore()
-// });
-getCustomers()
-getStore()
+document.addEventListener("DOMContentLoaded", function(){ 
+    getCustomers()
+    getStore()
+});
+
+
+// button for to show/hide customers
+const custButtonDiv = document.querySelector('#customer-buttons')
+const custContainer = document.querySelector('#customer-container'
+)
+const showHideButton = document.createElement('button')
+showHideButton.classList.add('btn-secondary')
+showHideButton.innerHTML = "Toggle Customer View"
+custButtonDiv.appendChild(showHideButton)
+
+showHideButton.addEventListener('click', function(e){
+    e.preventDefault()
+    custContainer.classList.toggle('hidden') 
+})
+
 
 function getStore(){
     fetch('http://localhost:3000/api/stores/1')
@@ -20,18 +35,11 @@ function getStore(){
         storePic.width = '350'
         storeContainer.append(storePic)
 
-        // button for to show/hide customers
-        const custButtonDiv = document.querySelector('#customer-buttons')
-        const showHideButton = document.createElement('button')
-        showHideButton.classList.add('btn-secondary')
-        
-        showHideButton.innerHTML = "Toggle Customer View"
-        custButtonDiv.appendChild(showHideButton)
 
-        showHideButton.addEventListener('click', function(e){
-            e.preventDefault()
-            custContainer.classList.toggle('hidden') 
-        })
+        // showHideButton.addEventListener('click', function(e){
+        //     e.preventDefault()
+        //     custContainer.classList.toggle('hidden') 
+        // })
 
 
             // customer edit/delete buttons 
