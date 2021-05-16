@@ -1,6 +1,7 @@
 // document.addEventListener("DOMContentLoaded", function(){
 //     getStore()
 // });
+getCustomers()
 getStore()
 
 function getStore(){
@@ -32,39 +33,6 @@ function getStore(){
             custContainer.classList.toggle('hidden') 
         })
 
-        
-        
-        // list of customers
-        // const custContainer = document.querySelector('#customer-container')
-        // const customerList = store.data.attributes.customers
-        
-        // createNewCustomer()
-        // called this here so that I wouldn't have to refresh to see new customer
-
-        // customerList.map(customer => {
-
-            
-            // PUT THE NEW CUSTOMER HERE!!!!
-
-            const customerDiv = document.createElement('div');
-            customerDiv.classList.add('float-child')
-            custContainer.appendChild(customerDiv);
-
-            const customerName = document.createElement('h5')
-            customerName.innerText = customer.name
-            customerDiv.appendChild(customerName)
-
-            const customerEmail = document.createElement('p')
-            customerEmail.innerText = customer.email
-            customerDiv.appendChild(customerEmail)
-
-            const customerPhone = document.createElement('p')
-            customerPhone.innerText = customer.phone
-            customerDiv.appendChild(customerPhone)
-
-            const customerBikeStyle = document.createElement('p')
-            customerBikeStyle.innerText = `Customer Bike Style: ${customer.bikeStyle}`
-            customerDiv.appendChild(customerBikeStyle)
 
             // customer edit/delete buttons 
             const editCustomerButton = document.createElement('button')
@@ -90,6 +58,33 @@ function getStore(){
             form.classList.toggle('hidden'); 
         })
     }
+
+function getCustomers() {
+    fetch('http://localhost:3000/api/stores/1/customers')
+    .then (resp => resp.json())
+    .then (customers => {
+        
+        customers.data.forEach(customer => {
+
+            let newCustomer = new Customer(customer, customer.attributes)
+            const customerContainer = document.querySelector('#customer-container')
+
+            customerContainer.innerHTML += newCustomer.renderCustomer()
+
+
+
+        })
+
+    })
+
+}
+
+
+
+
+
+
+
 
 
 const createCustForm = document.querySelector('#create-cust-form')
