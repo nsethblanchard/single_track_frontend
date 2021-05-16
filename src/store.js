@@ -13,7 +13,15 @@ class Store {
 
     // don't need "function" keyword when declared in classes
     renderStore() {
-        debugger
+        // debugger
+        return `
+            <div data-id=${this.id}>
+                <h1>${this.name}</h1>
+                <h3>Located in ${this.city}</h3>
+                <h3>${this.phone}</h3>
+            </div>
+            <br>
+        `
     }
 
 

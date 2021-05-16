@@ -1,34 +1,23 @@
-
-
-document.addEventListener("DOMContentLoaded", function(){
-    getStore()
-});
+// document.addEventListener("DOMContentLoaded", function(){
+//     getStore()
+// });
+getStore()
 
 function getStore(){
     fetch('http://localhost:3000/api/stores/1')
     .then (resp => resp.json())
     .then (store => {
 
-        
         // creates a new instance of a syllabus class
         let newStore = new Store(store.data, store.data.attributes)
-        // store.data grabs the id and then store.data.attributes grabs the rest(due to fastJSON)
-
+        const storeContainer = document.querySelector('#store-container')
+        storeContainer.innerHTML += newStore.renderStore()
         
-        store.data.attributes.customers.forEach(data => {
-            let newCust = new Customer(data)
-        })
-
-        // Store Info
-        const storeName = document.createElement('h1')
-        storeName.innerText = store.data.attributes.name
-        const storePhone = document.createElement('h3')
-        storePhone.innerText = store.data.attributes.phone
+        // added picture manually, should have added as attribute in initial migration
         const storePic = document.createElement('img')
         storePic.src = 'https://lh3.googleusercontent.com/OZ_i32kAJo5viB3gTBaph2QhI1DclqlGsr53Pfnc4nBWULSmm6CmZGalXiTiO0cM3TzZvg=s85'
         storePic.width = '350'
-        const storeContainer = document.querySelector('#store-container')
-        storeContainer.append(storeName, storePhone, storePic)
+        storeContainer.append(storePic)
 
         // button for to show/hide customers
         const custButtonDiv = document.querySelector('#customer-buttons')
@@ -43,14 +32,16 @@ function getStore(){
             custContainer.classList.toggle('hidden') 
         })
 
-        // list of customers
-        const custContainer = document.querySelector('#customer-container')
-        const customerList = store.data.attributes.customers
         
-        createNewCustomer()
+        
+        // list of customers
+        // const custContainer = document.querySelector('#customer-container')
+        // const customerList = store.data.attributes.customers
+        
+        // createNewCustomer()
         // called this here so that I wouldn't have to refresh to see new customer
 
-        customerList.map(customer => {
+        // customerList.map(customer => {
 
             
             // PUT THE NEW CUSTOMER HERE!!!!
@@ -98,10 +89,12 @@ function getStore(){
             e.preventDefault()
             form.classList.toggle('hidden'); 
         })
-    })
-}
+    }
+
 
 const createCustForm = document.querySelector('#create-cust-form')
+
+
 
 function createNewCustomer(){
     createCustForm.addEventListener('submit', function() {
