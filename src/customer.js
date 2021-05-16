@@ -17,6 +17,8 @@ class Customer {
                 <p>${this.phone}</p>
                 <p>${this.email}</p>
                 <p>Customer Bike Style: ${this.bikeStyle}</p>
+                <button type="button" class="btn-secondary"> Edit ${this.name}</button>
+                <button type="button" class="btn-secondary"> Delete ${this.name}</button>
             </div>
         `
     }

@@ -1,6 +1,9 @@
 document.addEventListener("DOMContentLoaded", function(){ 
+    
     getCustomers()
     getStore()
+    createNewCustomer()
+    
 });
 
 
@@ -34,7 +37,6 @@ function getStore(){
     fetch('http://localhost:3000/api/stores/1')
     .then (resp => resp.json())
     .then (store => {
-
         // creates a new instance of a syllabus class
         let newStore = new Store(store.data, store.data.attributes)
         const storeContainer = document.querySelector('#store-container')
@@ -45,55 +47,28 @@ function getStore(){
         storePic.src = 'https://lh3.googleusercontent.com/OZ_i32kAJo5viB3gTBaph2QhI1DclqlGsr53Pfnc4nBWULSmm6CmZGalXiTiO0cM3TzZvg=s85'
         storePic.width = '350'
         storeContainer.append(storePic)
-
-
-            // customer edit/delete buttons 
-            const editCustomerButton = document.createElement('button')
-            editCustomerButton.classList.add('btn-secondary')
-            editCustomerButton.innerHTML = `Edit ${customer.name}`
-            customerDiv.appendChild(editCustomerButton)
-            
-            const deleteCustomerButton = document.createElement('button')
-            deleteCustomerButton.classList.add('btn-secondary')
-            deleteCustomerButton.innerHTML = `Delete ${customer.name}`
-            customerDiv.appendChild(deleteCustomerButton)
         })
     }
+
 
 function getCustomers() {
     fetch('http://localhost:3000/api/stores/1/customers')
     .then (resp => resp.json())
     .then (customers => {
-        
         customers.data.forEach(customer => {
-
             let newCustomer = new Customer(customer, customer.attributes)
             const customerContainer = document.querySelector('#customer-container')
 
             customerContainer.innerHTML += newCustomer.renderCustomer()
-
-
-
         })
-
     })
-
 }
-
-
-
-
-
-
-
-
 
 const createCustForm = document.querySelector('#create-cust-form')
 
-
-
 function createNewCustomer(){
-    createCustForm.addEventListener('submit', function() {
+    createCustForm.addEventListener('submit', function(e) {
+        e.preventDefault()
         // set values from customer form after submit
         const nameInput = document.querySelector('#input-name').value
         const emailInput = document.querySelector('#input-email').value
@@ -106,8 +81,8 @@ function createNewCustomer(){
 
     function postFetch(name, email, phone, stravaURL, bikeStyle, store_id) {
         let data = {name, email, phone, stravaURL, bikeStyle, store_id}
-        // second fetch to create new customers
-        fetch('http://localhost:3000/api/customers', {
+        
+        fetch('http://localhost:3000/api/stores/1/customers', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
