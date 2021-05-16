@@ -18,6 +18,17 @@ showHideButton.addEventListener('click', function(e){
     custContainer.classList.toggle('hidden') 
 })
 
+// button to show/hide new customer form
+const newCustomerFormButton = document.createElement('button')
+newCustomerFormButton.classList.add('btn-secondary')
+newCustomerFormButton.innerHTML = "Add new customer"
+custButtonDiv.appendChild(newCustomerFormButton)
+
+const form = document.querySelector('#form-container')
+newCustomerFormButton.addEventListener('click', function(e){
+    e.preventDefault()
+    form.classList.toggle('hidden'); 
+})
 
 function getStore(){
     fetch('http://localhost:3000/api/stores/1')
@@ -36,12 +47,6 @@ function getStore(){
         storeContainer.append(storePic)
 
 
-        // showHideButton.addEventListener('click', function(e){
-        //     e.preventDefault()
-        //     custContainer.classList.toggle('hidden') 
-        // })
-
-
             // customer edit/delete buttons 
             const editCustomerButton = document.createElement('button')
             editCustomerButton.classList.add('btn-secondary')
@@ -52,18 +57,6 @@ function getStore(){
             deleteCustomerButton.classList.add('btn-secondary')
             deleteCustomerButton.innerHTML = `Delete ${customer.name}`
             customerDiv.appendChild(deleteCustomerButton)
-        })
-
-        // button to show/hide new customer form
-        const newCustomerForm = document.createElement('button')
-        newCustomerForm.classList.add('btn-secondary')
-        newCustomerForm.innerHTML = "Add new customer"
-        custButtonDiv.appendChild(newCustomerForm)
-
-        const form = document.querySelector('#form-container')
-        newCustomerForm.addEventListener('click', function(e){
-            e.preventDefault()
-            form.classList.toggle('hidden'); 
         })
     }
 
