@@ -1,9 +1,7 @@
 document.addEventListener("DOMContentLoaded", function(){ 
-    
     getCustomers()
     getStore()
     createNewCustomer()
-    
 });
 
 
@@ -37,7 +35,7 @@ function getStore(){
     fetch('http://localhost:3000/api/stores/1')
     .then (resp => resp.json())
     .then (store => {
-        // creates a new instance of a syllabus class
+        // creates a new instance of a store class
         let newStore = new Store(store.data, store.data.attributes)
         const storeContainer = document.querySelector('#store-container')
         storeContainer.innerHTML += newStore.renderStore()
@@ -60,6 +58,8 @@ function getCustomers() {
             const customerContainer = document.querySelector('#customer-container')
 
             customerContainer.innerHTML += newCustomer.renderCustomer()
+
+            // createNewCustomer()
         })
     })
 }
@@ -92,12 +92,36 @@ function createNewCustomer(){
             // you can use the data variable instead of adding each key/value pair since key name and value are same...
 
         .then(resp => resp.json())
-        .then(cust => {
-            
-            console.log(cust)
+        .then(customer => {
+                // console.log(customer)
+                
+                // let newCustomer = new Customer(customer)
+                // const customerContainer = document.querySelector('#customer-container')
+
+                // customerContainer.innerHTML += newCustomer.renderCustomer()
         })
     }
 }
+
+
+
+
+const deleteButton = document.querySelector('.delete-customer')
+console.log("Delete Button", deleteButton)
+
+// function deleteCustomer() {
+//     fetch(`http://localhost:3000/api/stores/1/customers/${}`, {
+//         method: "DELETE",
+//         headers: {
+//             "Content-Type": "application/json",
+//             "Accept": "application/json"
+//         }
+//         body: JSON.stringify()}) 
+
+//         .then(resp => resp.json())
+//         .then(customer => console.log(customer))
+
+// }
 
     
 
