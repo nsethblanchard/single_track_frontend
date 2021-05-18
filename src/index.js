@@ -24,6 +24,15 @@ function getStores(){
     })
 }
 
+const createStoreButton = document.querySelector('#create-store')
+const createStoreForm = document.querySelector('#store-form-container')
+
+createStoreButton.addEventListener('click', function(e){
+    e.preventDefault()
+    createStoreForm.classList.toggle('hidden')
+
+})
+
 
 
 // button for to show/hide customers
