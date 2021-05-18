@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", function(){ 
     getCustomers()
     getStore()
-    createNewCustomer()
+    // createNewCustomer()
+    
 });
 
 
@@ -45,11 +46,6 @@ function getStore(){
         const storeContainer = document.querySelector('#store-container')
         storeContainer.innerHTML += newStore.renderStore()
         
-        // added picture manually, should have added as attribute in initial migration
-        const storePic = document.createElement('img')
-        storePic.src = 'https://lh3.googleusercontent.com/OZ_i32kAJo5viB3gTBaph2QhI1DclqlGsr53Pfnc4nBWULSmm6CmZGalXiTiO0cM3TzZvg=s85'
-        storePic.width = '350'
-        storeContainer.append(storePic)
         })
     }
 
@@ -63,17 +59,24 @@ function getCustomers() {
             const customerContainer = document.querySelector('#customer-container')
 
             customerContainer.innerHTML += newCustomer.renderCustomer()
+          
+            // delete button
+            const deleteButton = document.querySelectorAll('.delete-customer')
+        
+        
+            deleteButton.forEach(del => {
+                del.addEventListener('click', function(e){
+                    e.preventDefault()
+                    console.log("id =>", e.target.id)
+                
+                
+                const deleteURL = `http://localhost:3000/api/stores/1/customers/${e.target.id}`
+                deleteCustomer(deleteURL)
             
+
         })
 
-        // delete button
-        const deleteButton = document.querySelectorAll('.delete-customer')
         
-        deleteButton.forEach(del => {
-            del.addEventListener('click', function(e){
-                e.preventDefault()
-                console.log("id =>", e.target.id)
-                console.log(Customer.findById(e.target.id))
 
             })
         })
@@ -88,11 +91,9 @@ function createNewCustomer(){
         e.preventDefault()
         // set values from customer form after submit
         const nameInput = document.querySelector('#input-name').value
-        const emailInput = document.querySelector('#input-email').value
         const phoneInput = document.querySelector('#input-phone').value
-        const stravaInput = document.querySelector('#input-stravaURL').value
         const prefRiding = document.querySelector('#input-bikeStyle').value
-        const storeID = 1
+        // const storeID = 1
         postFetch(nameInput, emailInput, phoneInput, stravaInput, prefRiding, storeID)
     })
 
@@ -121,8 +122,8 @@ function createNewCustomer(){
 }
 
 
-// function deleteCustomer() {
-//     fetch(`http://localhost:3000/api/stores/1/customers/${}`, {
+// function deleteCustomer(deleteURL) {
+//     fetch(deleteURL, {
 //         method: "DELETE",
 //         headers: {
 //             "Content-Type": "application/json",
@@ -133,7 +134,7 @@ function createNewCustomer(){
 //         .then(resp => resp.json())
 //         .then(customer => {
 
-
+//             console.log(customer)
 
 //         })
 

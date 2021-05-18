@@ -4,9 +4,8 @@ class Customer {
     constructor(customer, customerAttributes) {
         this.id = customer.id
         this.name = customerAttributes.name;
-        this.email = customerAttributes.email;
         this.phone = customerAttributes.phone;
-        this.bikeStyle = customerAttributes.bikeStyle;
+        this.bikeStyle = customerAttributes.bike_style;
         Customer.all.push(this);
     }  
 
