@@ -32,20 +32,12 @@
                 <input id='input-name' type="text" name='name' placeholder="Enter Name">
                 <br>
                 <br>
-                <label for="input-email">Customer Email:</label>
-                <input id='input-email' type="email" name='email' placeholder="Enter Email">
-                <br>
-                <br>
                 <label for="input-phone">Customer Phone:</label>
                 <input id='input-phone' type="text" name='phone' placeholder="Enter Phone Number">
                 <br>
                 <br>
-                <label for="input-stravaURL">Strava Name:</label>
-                <input id='input-stravaURL' type="text" name='phone' placeholder="Strava name here">
-                <br>
-                <br>
                 <label for="input-bikeStyle">Preferred Style(s) of riding:</label>
-                <textarea id='input-bikeStyle' type="text" name='phone' placeholder="Mountain/Road/bikepacking?"></textarea>
+                <textarea id='input-bikeStyle' type="text" name='bike_style' placeholder="Mountain/Road/bikepacking?"></textarea>
                 <br>
                 <br>
 
@@ -60,8 +52,9 @@
 
         
 
-        
-        <script type="text/javascript" src="index.js" ></script> 
+        <script type="text/javascript" src="src/store.js" ></script>
+        <script type="text/javascript" src="src/customer.js" ></script> 
+        <script type="text/javascript" src="src/index.js" ></script> 
         <!-- could add async defer to script and avoid DOMContentLoaded... -->
     </body>
 </html>
