@@ -5,9 +5,9 @@ class Store {
     constructor(store) {
         
         this.id = store.id;
-        this.name = store.attributes.name;
-        this.phone = store.attributes.phone;
-        this.city = store.attributes.city;
+        this.name = store.name;
+        this.phone = store.phone;
+        this.city = store.city;
         Store.all.push(this);
         // debugger
     }

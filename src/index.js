@@ -25,8 +25,8 @@ function getStores(){
         stores.data.forEach(store => {
         
             // creates a new instance of a store class
-            console.log(store)
-            let newStore = new Store(store)
+            console.log("from get stores", store.attributes)
+            let newStore = new Store(store.attributes)
             storeContainer.innerHTML += newStore.renderStore()
 
             // add the delete store button stuff here!!!
@@ -58,9 +58,10 @@ function postNewStore(name, phone, city) {
         body: JSON.stringify(data)})
     .then(resp => resp.json())
     .then(store => {
-        // console.log(store)
-        // let newStore = new Store(store)
-        // storeContainer.innerHTML += newStore.renderStore()
+        
+        createStoreForm.classList.toggle('hidden')
+        let newStore = new Store(store)
+        storeContainer.innerHTML += newStore.renderStore()
     })
 
 }
