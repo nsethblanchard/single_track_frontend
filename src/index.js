@@ -23,11 +23,22 @@ function getStores(){
     .then (stores => {
 
         stores.data.forEach(store => {
-        
+            
             // creates a new instance of a store class
-            console.log("from get stores", store.attributes)
-            let newStore = new Store(store.attributes)
+
+            // I built this object because I wanted to make the data coming from index match post
+            const storeData = {
+                id: store.id,
+                name: store.attributes.name,
+                phone: store.attributes.phone,
+                city: store.attributes.city,
+            }
+
+            
+            let newStore = new Store(storeData)
             storeContainer.innerHTML += newStore.renderStore()
+
+            // const deleteStoreButton = document.querySelectorAll("")
 
             // add the delete store button stuff here!!!
             // Maybe a create customer button as well
@@ -58,7 +69,7 @@ function postNewStore(name, phone, city) {
         body: JSON.stringify(data)})
     .then(resp => resp.json())
     .then(store => {
-        
+        console.log("post new store", store)
         createStoreForm.classList.toggle('hidden')
         let newStore = new Store(store)
         storeContainer.innerHTML += newStore.renderStore()

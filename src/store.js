@@ -3,13 +3,13 @@
 
 class Store {
     constructor(store) {
-        
+        // debugger
         this.id = store.id;
         this.name = store.name;
         this.phone = store.phone;
         this.city = store.city;
         Store.all.push(this);
-        // debugger
+        
     }
 
     // don't need "function" keyword when declared in classes
