@@ -2,12 +2,15 @@
 
 
 class Store {
+    static all = [];
+
     constructor(store) {
         this.id = store.id;
         this.name = store.name;
         this.phone = store.phone;
         this.city = store.city;
         Store.all.push(this);
+        // debugger
     }
 
 
@@ -29,4 +32,3 @@ class Store {
 
 }
 
-Store.all = [];

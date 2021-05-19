@@ -11,8 +11,20 @@ const storeForm = document.querySelector('#create-store-form')
      createStoreForm.classList.toggle('hidden')
  })
 
-
 getStores()
+
+
+// event delegation to get around issues with new store object's delete buttons not having event at creation
+document.addEventListener('click', function(event) {
+    if (event.target.matches('.delete-store')) {
+        const store = Store.findById(event.target.id)
+        const url = `http://localhost:3000/api/stores/${event.target.id}`
+        console.log("id =>",event.target.id)
+        console.log("url =>",url)
+        console.log("why doesn't this store exist here? =>",store)
+        deleteStore(url, store)
+        }
+    }, false);
 
 function getStores(){
     fetch('http://localhost:3000/api/stores')
@@ -31,7 +43,6 @@ function getStores(){
             // create new store
             let newStore = new Store(storeData)
             storeContainer.innerHTML += newStore.renderStore()
-        
         })
     })
 }
@@ -71,35 +82,14 @@ function postNewStore(name, phone, city) {
         body: JSON.stringify(data)})
     .then(resp => resp.json())
     .then(store => {
-        
+        console.log(store)
         createStoreForm.classList.toggle('hidden')
         
-        let newStore = new Store(store)
+        const newStore = new Store(store)
         storeContainer.innerHTML += newStore.renderStore()
-
+        
         })
     }
-
-    document.addEventListener('click', function (event) {
-
-        if (event.target.matches('.delete-store')) {
-            event.preventDefault()
-            const store = Store.findById(event.target.id)
-            const url = `http://localhost:3000/api/stores/${event.target.id}`
-            console.log(event.target.id)
-            console.log(url)
-            console.log(store)
-            deleteStore(url, store)
-        }
-    }, false);
-
-
-
-
-
-       
-
-
 
 
 // button for to show/hide customers
