@@ -1,31 +1,25 @@
-document.addEventListener("DOMContentLoaded", function(){ 
-    getStores()
-    
-    // getCustomers()
-    // createNewCustomer()
-    
-});
-
-// New Store Button
-const createStoreButton = document.querySelector('#create-store')
-const createStoreForm = document.querySelector('#store-form-container')
-createStoreButton.addEventListener('click', function(e){
-    e.preventDefault()
-    createStoreForm.classList.toggle('hidden')
-})
 
 const storeContainer = document.querySelector('#store-container')
+const storeForm = document.querySelector('#create-store-form')
 
+ // New Store Button
+ const createStoreButton = document.querySelector('#create-store')
+ const createStoreForm = document.querySelector('#store-form-container')
+ 
+ createStoreButton.addEventListener('click', function(e){
+     e.preventDefault()
+     createStoreForm.classList.toggle('hidden')
+ })
+
+
+getStores()
 
 function getStores(){
     fetch('http://localhost:3000/api/stores')
     .then (resp => resp.json())
     .then (stores => {
-
         stores.data.forEach(store => {
             
-            // creates a new instance of a store class
-
             // I built this object because I wanted to make the data coming from index match post
             const storeData = {
                 id: store.id,
@@ -33,21 +27,29 @@ function getStores(){
                 phone: store.attributes.phone,
                 city: store.attributes.city,
             }
-
             
+            // create new store
             let newStore = new Store(storeData)
             storeContainer.innerHTML += newStore.renderStore()
-
-            // const deleteStoreButton = document.querySelectorAll("")
-
-            // add the delete store button stuff here!!!
-            // Maybe a create customer button as well
-        })    
+        
+        })
     })
 }
 
+//delete store
+function deleteStore(deleteURL, store) {
+    const delStore = storeContainer.querySelector(`#store-${store.id}`)
+    
+    fetch(deleteURL, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+    }) 
+    .then(delStore.remove())
+}
 
-const storeForm = document.querySelector('#create-store-form')
 
 storeForm.addEventListener('submit', function(e) {
     e.preventDefault()
@@ -69,13 +71,34 @@ function postNewStore(name, phone, city) {
         body: JSON.stringify(data)})
     .then(resp => resp.json())
     .then(store => {
-        console.log("post new store", store)
+        
         createStoreForm.classList.toggle('hidden')
+        
         let newStore = new Store(store)
         storeContainer.innerHTML += newStore.renderStore()
-    })
 
-}
+        })
+    }
+
+    document.addEventListener('click', function (event) {
+
+        if (event.target.matches('.delete-store')) {
+            event.preventDefault()
+            const store = Store.findById(event.target.id)
+            const url = `http://localhost:3000/api/stores/${event.target.id}`
+            console.log(event.target.id)
+            console.log(url)
+            console.log(store)
+            deleteStore(url, store)
+        }
+    }, false);
+
+
+
+
+
+       
+
 
 
 
