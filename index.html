@@ -11,21 +11,47 @@
     </head>
     <body>
         <h1>Welcome to Single Track</h1>
-        <h2>Customer Data for your Cycling Business</h2>
-                
+        <h2>Customer Data for your Cycling Businesses</h2>
+         
+        <div>
+            <button type="button" id="create-store" class="btn-secondary">Create Store Form</button>
+        </div>
+
+        <div id='store-form-container' class='hidden'>
+            <form id='create-store-form'>
+                <h3>Create a New Store</h3>
+                <label for="input-name">Store Name:</label>
+                <input id='input-store-name' type="text" name='name' placeholder="Enter Name">
+                <br>
+                <br>
+                <label for="input-phone">Store Phone:</label>
+                <input id='input-store-phone' type="text" name='phone' placeholder="Enter Phone Number">
+                <br>
+                <br>
+                <label for="input-city">Location: </label>
+                <textarea id='input-store-city' type="text" name='city' placeholder="Please input City Name"></textarea>
+                <br>
+                <br>
+                <input id='create-button' type="submit" name='submit' value='Create New Store' class='btn-secondary'>
+            </form>
+        </div>
+
+
+        <h2>List of Current Stores: </h2>
+        <h2>_______________________</h2>
         <div id="store-container">
         
         </div>
 
-        <div id="customer-buttons">
+        <!-- <div id="customer-buttons">
         
-        </div>
+        </div> -->
 
 
         
 
             
-        <div id='form-container' class='hidden'>
+        <div id='customer-form-container' class='hidden'>
             <form id='create-cust-form'>
                 <h3>Create a New Customer</h3>
                 <label for="input-name">Customer Name:</label>
@@ -52,9 +78,9 @@
 
         
 
-        <script type="text/javascript" src="src/store.js" ></script>
-        <script type="text/javascript" src="src/customer.js" ></script> 
-        <script type="text/javascript" src="src/index.js" ></script> 
+        <script type="text/javascript" src="src/store.js" async defer></script>
+        <script type="text/javascript" src="src/customer.js" async defer></script> 
+        <script type="text/javascript" src="src/index.js" async defer></script> 
         <!-- could add async defer to script and avoid DOMContentLoaded... -->
     </body>
 </html>
