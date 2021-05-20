@@ -15,7 +15,10 @@ getStores()
 
 
 // event delegation to get around issues with new store object's delete buttons not having event at creation
+
+// delete store button
 document.addEventListener('click', function(event) {
+    
     if (event.target.matches('.delete-store')) {
         const store = Store.findById(event.target.id)
         const url = `http://localhost:3000/api/stores/${event.target.id}`
@@ -82,7 +85,7 @@ function postNewStore(name, phone, city) {
         body: JSON.stringify(data)})
     .then(resp => resp.json())
     .then(store => {
-        console.log(store)
+        // console.log(store)
         createStoreForm.classList.toggle('hidden')
         
         const newStore = new Store(store)
