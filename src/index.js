@@ -16,7 +16,7 @@ getStores()
 
 // event delegation to get around issues with new store object's delete buttons not having event at creation
 
-// delete store button
+// delete store buttons
 document.addEventListener('click', function(event) {
     
     if (event.target.matches('.delete-store')) {
@@ -24,7 +24,7 @@ document.addEventListener('click', function(event) {
         const url = `http://localhost:3000/api/stores/${event.target.id}`
         console.log("id =>",event.target.id)
         console.log("url =>",url)
-        console.log("why doesn't this store exist here? =>",store)
+        console.log("why doesn't this store exist here? =>", store)
         deleteStore(url, store)
         }
     }, false);
@@ -47,14 +47,10 @@ function getStores(){
             // create new store
             let newStore = new Store(storeData)
             storeContainer.innerHTML += newStore.renderStore()
-            
-            
-            
-            
+                   
             const storeDiv = document.querySelector(`#store-${store.id}`)
             storeDiv.insertAdjacentHTML('afterend', "&nbsp;")
             
-
             // create associated customers
             store.attributes.customers.forEach(customer => {
                 let newCustomer = new Customer(customer);
@@ -88,7 +84,6 @@ storeForm.addEventListener('submit', function(e) {
     postNewStore(newStoreName, newStorePhone, newStoreCity)
 })
 
-
 function postNewStore(name, phone, city) {
     const data = {name, phone, city}
     fetch('http://localhost:3000/api/stores', {
@@ -105,7 +100,6 @@ function postNewStore(name, phone, city) {
         
         const newStore = new Store(store)
         storeContainer.innerHTML += newStore.renderStore()
-        
         })
     }
 
