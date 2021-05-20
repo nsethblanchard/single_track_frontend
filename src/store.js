@@ -16,12 +16,15 @@ class Store {
 
     renderStore() {
         return `
+            
             <div id="store-${this.id}">
                 <h1>${this.name}</h1>
                 <h3>Located in ${this.city}</h3>
                 <h3>${this.phone}</h3>
                 <button type="button" id="${this.id}" class="btn-secondary delete-store"> Delete ${this.name} </button>
+                <br>
             </div>
+            <br>
             <br>
         `
     }
