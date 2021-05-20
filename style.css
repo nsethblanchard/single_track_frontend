@@ -1,7 +1,13 @@
 
 * {
+    align-items: center;
     text-align: center;
     padding-top: 25px;
+}
+
+div {
+    margin: 20px 0px 50px 10px; 
+    align-self: center;
 }
 
 p {
@@ -23,9 +29,9 @@ body {
 
 .float-child {
     width: 25%;
-    float: left;
     padding: 20px;
     
+    display: inline-block;
     border: 2px solid black;
 }  
 

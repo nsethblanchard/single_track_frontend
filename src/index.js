@@ -33,6 +33,7 @@ function getStores(){
     fetch('http://localhost:3000/api/stores')
     .then (resp => resp.json())
     .then (stores => {
+        
         stores.data.forEach(store => {
             
             // I built this object because I wanted to make the data coming from index match post
@@ -46,6 +47,20 @@ function getStores(){
             // create new store
             let newStore = new Store(storeData)
             storeContainer.innerHTML += newStore.renderStore()
+            
+            
+            
+            
+            const storeDiv = document.querySelector(`#store-${store.id}`)
+            storeDiv.insertAdjacentHTML('afterend', "&nbsp;")
+            
+
+            // create associated customers
+            store.attributes.customers.forEach(customer => {
+                let newCustomer = new Customer(customer);
+                storeDiv.innerHTML += newCustomer.renderCustomer()
+            })
+            
         })
     })
 }
