@@ -22,9 +22,6 @@ document.addEventListener('click', function(event) {
     if (event.target.matches('.delete-store')) {
         const store = Store.findById(event.target.id)
         const url = `http://localhost:3000/api/stores/${event.target.id}`
-        console.log("id =>",event.target.id)
-        console.log("url =>",url)
-        console.log("why doesn't this store exist here? =>", store)
         deleteStore(url, store)
         }
     }, false);
