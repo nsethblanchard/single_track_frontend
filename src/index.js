@@ -13,10 +13,7 @@ const storeForm = document.querySelector('#create-store-form')
 
 getStores()
 
-
-// event delegation to get around issues with new store object's delete buttons not having event at creation
-
-// delete store buttons
+// delete store buttons using event delegation
 document.addEventListener('click', function(event) {
     
     if (event.target.matches('.delete-store')) {
@@ -92,12 +89,29 @@ function postNewStore(name, phone, city) {
         body: JSON.stringify(data)})
     .then(resp => resp.json())
     .then(store => {
-        // console.log(store)
         createStoreForm.classList.toggle('hidden')
         
         const newStore = new Store(store)
-        storeContainer.innerHTML += newStore.renderStore()
+        let newStoreHTML = newStore.renderStore()
+        
+        storeContainer.innerHTML += newStoreHTML
+
+        // for some reason, I couldn't get the new store's delete button to show in the previous event delegation-this was the workaround
+        let newDeleteButtons = document.getElementsByClassName('delete-store')
+        let index = newDeleteButtons.length - 1
+            newDeleteButtons[`${index}`].addEventListener('click', function(e){
+                e.preventDefault()
+                // console.log("e target =>", e.target)
+                const ind = Store.all.length - 1 
+                const store = Store.all[`${ind}`]
+                const url = `http://localhost:3000/api/stores/${e.target.id}`
+
+                deleteStore(url, store)
+            })
         })
+    
+    
+
     }
 
 
