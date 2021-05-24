@@ -2,7 +2,7 @@
 
 
 class Store {
-    static all = [];
+    // static all = [];
 
     constructor(store) {
         this.id = store.id;
@@ -35,3 +35,4 @@ class Store {
 
 }
 
+Store.all = []
