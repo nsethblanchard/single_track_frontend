@@ -17,9 +17,12 @@ getStores()
 document.addEventListener('click', function(event) {
     
     if (event.target.matches('.delete-store')) {
+        // added this second if to kill the undefined error I was getting for the newly created store (so it didn't need a refresh)
         const store = Store.findById(event.target.id)
-        const url = `http://localhost:3000/api/stores/${event.target.id}`
-        deleteStore(url, store)
+        if (store !== undefined) {
+            const url = `http://localhost:3000/api/stores/${event.target.id}`
+            deleteStore(url, store)
+            }
         }
     }, false);
 
@@ -101,7 +104,6 @@ function postNewStore(name, phone, city) {
         let index = newDeleteButtons.length - 1
             newDeleteButtons[`${index}`].addEventListener('click', function(e){
                 e.preventDefault()
-                // console.log("e target =>", e.target)
                 const ind = Store.all.length - 1 
                 const store = Store.all[`${ind}`]
                 const url = `http://localhost:3000/api/stores/${e.target.id}`
